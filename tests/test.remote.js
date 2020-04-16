@@ -1,6 +1,10 @@
 const tap = require('tap');
-process.env.SHARED_PATH = __dirname;
-const s3 = require('../index');
+const Storage = require('../index');
+
+const s3 = new Storage({
+  bucket: process.env.S3_BUCKET || 'ft-utils-test',
+  delimiter: process.env.S3_DELIMITER || '/'
+});
 
 tap.test('put', async t => {
   const result = await s3.put('key1', {

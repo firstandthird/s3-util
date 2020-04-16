@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "tap tests",
+    "test": "rm -rf /db && tap tests",
     "lint": "eslint ."
   },
   "repository": {
