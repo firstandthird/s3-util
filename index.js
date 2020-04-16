@@ -1,12 +1,12 @@
 class Storage {
-  constructor(config = {}) {
+  constructor(config) {
     this.config = config;
     if (config.bucket) {
       const AWS = require('aws-sdk');
       config.aws = new AWS.S3();
       this.library = require('./lib/remote');
-    } else if (config.root) {
-      config.separator = config.separator || '##';
+    } else {
+      config.separator = config.separator || '##'; // try to use a separator that isn't commonplace like '_'
       this.library = require('./lib/local');
     }
   }
