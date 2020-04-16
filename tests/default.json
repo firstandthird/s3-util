@@ -1,0 +1,4 @@
+{
+  "bucket": "{{getEnv('S3_BUCKET', 'ft-utils-test')}}",
+  "delimiter": "{{getEnv('S3_DELIMITER', '/')}}"
+}
