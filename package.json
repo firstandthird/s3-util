@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "s3db for using s3 as a db",
   "main": "index.js",
-  "private": true,
   "scripts": {
     "test": "rm -rf /db && tap tests",
     "lint": "eslint ."
