@@ -1,7 +1,7 @@
 {
-  "name": "@firstandthird/s3-utils",
+  "name": "@firstandthird/s3db",
   "version": "1.0.0",
-  "description": "s3-utils for using s3 as a db",
+  "description": "s3db for using s3 as a db",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/firstandthird/s3-utils.git"
+    "url": "git+https://github.com/firstandthird/s3db.git"
   },
   "author": "First & Third",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/firstandthird/s3-utils/issues"
+    "url": "https://github.com/firstandthird/s3db/issues"
   },
-  "homepage": "https://github.com/firstandthird/s3-utils#readme",
+  "homepage": "https://github.com/firstandthird/s3db#readme",
   "eslintConfig": {
     "extends": "firstandthird",
     "rules": {
