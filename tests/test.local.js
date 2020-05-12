@@ -79,9 +79,22 @@ tap.test('list with folders', async t => {
   t.end();
 });
 
+tap.test('get JSON', async t => {
+  await s3.put('key1.json', {
+    v1: true,
+    v2: 'v2'
+  });
+  const result = await s3.get('key1.json');
+  t.match(result, {
+    v1: true,
+    v2: 'v2'
+  });
+  t.end();
+});
+
 tap.test('delete', async t => {
   const result = await s3.delete('key1');
-  t.equal(result, 1);
+  t.equal(result, 2);
   t.notOk(fs.existsSync(`${s3.config.root}/key1`));
   t.end();
 });
