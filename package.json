@@ -1,6 +1,6 @@
 {
   "name": "@firstandthird/s3db",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "s3db for using s3 as a db",
   "main": "index.js",
   "scripts": {
