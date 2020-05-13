@@ -15,8 +15,8 @@ class Storage {
     return this.library.put(key, body, acl, this.config);
   }
 
-  get(key, version = false) {
-    return this.library.get(key, version, this.config);
+  get(key, version = false, fallback = false) {
+    return this.library.get(key, version, this.config, fallback);
   }
 
   async exists(key) {
