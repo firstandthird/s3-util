@@ -70,6 +70,14 @@ tap.test('get JSON', async t => {
   t.end();
 });
 
+tap.test('get with fallback', async t => {
+  const result = await s3.get('no exist', false, { v1: 76 });
+  t.match(result, {
+    v1: 76
+  });
+  t.end();
+});
+
 tap.test('delete', async t => {
   const result = await s3.delete('key1');
   t.equal(result, 16);
