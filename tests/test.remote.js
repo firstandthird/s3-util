@@ -78,6 +78,15 @@ tap.test('get with fallback', async t => {
   t.end();
 });
 
+tap.test('getBulk', async t => {
+  const result = await s3.getBulk(['key1', 'key1.published', 'key1.json'], false, { v1: 76 });
+  t.match(result, [
+    { v1: true, v2: 'v2' },
+    { v1: 'this is the published version', published: true },
+    { v1: 76 }]);
+  t.end();
+});
+
 tap.test('delete', async t => {
   const result = await s3.delete('key1');
   t.equal(result, 16);

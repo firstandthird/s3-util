@@ -19,6 +19,11 @@ class Storage {
     return this.library.get(key, version, this.config, fallback);
   }
 
+  getBulk(arrayOfKeys, version = false, fallback = false) {
+    return Promise.all(arrayOfKeys.map(key =>
+      this.library.get(key, version, this.config, fallback)));
+  }
+
   async exists(key) {
     return this.library.exists(key, this.config);
   }

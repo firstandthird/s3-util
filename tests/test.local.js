@@ -100,6 +100,14 @@ tap.test('get with fallback', async t => {
   t.end();
 });
 
+tap.test('getBulk', async t => {
+  const result = await s3.getBulk(['key1', 'folder1/key1', 'key1.json'], false, { v1: 76 });
+  t.match(result[0].Body.toString(), '{"v1":true,"v2":"v2"}');
+  t.match(result[1].Body.toString(), '{"folder":true}');
+  t.match(result[2], { v1: true, v2: 'v2' });
+  t.end();
+});
+
 tap.test('delete', async t => {
   const result = await s3.delete('key1');
   t.equal(result, 2);
