@@ -79,6 +79,13 @@ tap.test('list with folders', async t => {
   t.end();
 });
 
+tap.test('listAndGet', async t => {
+  const folderResult = await s3.listAndGet('folder1');
+  t.match(folderResult[0].Body.toString(), '{"folder":true}');
+  t.match(folderResult[1].Body.toString(), 'undefined');
+  t.end();
+});
+
 tap.test('get JSON', async t => {
   await s3.put('key1.json', {
     v1: true,
@@ -97,6 +104,14 @@ tap.test('get with fallback', async t => {
   t.match(result, {
     v1: 76
   });
+  t.end();
+});
+
+tap.test('getBulk', async t => {
+  const result = await s3.getBulk(['key1', 'folder1/key1', 'key1.json'], false, { v1: 76 });
+  t.match(result[0].Body.toString(), '{"v1":true,"v2":"v2"}');
+  t.match(result[1].Body.toString(), '{"folder":true}');
+  t.match(result[2], { v1: true, v2: 'v2' });
   t.end();
 });
 

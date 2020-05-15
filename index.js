@@ -19,7 +19,12 @@ class Storage {
     return this.library.get(key, version, this.config, fallback);
   }
 
-  async exists(key) {
+  getBulk(arrayOfKeys, version = false, fallback = false) {
+    return Promise.all(arrayOfKeys.map(key =>
+      this.library.get(key, version, this.config, fallback)));
+  }
+
+  exists(key) {
     return this.library.exists(key, this.config);
   }
 
@@ -27,11 +32,19 @@ class Storage {
     return this.library.list(prefix, continuationToken, pageSize, this.config);
   }
 
-  async listVersions(prefix, publishedPrefix = false) {
+  async listAndGet(prefix = false, continuationToken = false, pageSize = false) {
+    const list = await this.library.list(prefix, continuationToken, pageSize, this.config);
+    if (list.Contents) {
+      return this.getBulk(list.Contents.map(l => l.Key));
+    }
+    return this.getBulk(list.CommonPrefixes.map(l => `${prefix}${l.Prefix}`));
+  }
+
+  listVersions(prefix, publishedPrefix = false) {
     return this.library.listVersions(prefix, publishedPrefix, this.config);
   }
 
-  async delete(prefix, publishedPrefix = false, config) {
+  delete(prefix, publishedPrefix = false, config) {
     return this.library.delete(prefix, publishedPrefix, this.config);
   }
 }

@@ -45,7 +45,7 @@ tap.test('list', async t => {
 
 tap.test('listVersion', async t => {
   // make a published version:
-  const putResult = await s3.put('key1.published', {
+  await s3.put('key1.published', {
     v1: 'this is the published version',
     published: true
   });
@@ -75,6 +75,27 @@ tap.test('get with fallback', async t => {
   t.match(result, {
     v1: 76
   });
+  t.end();
+});
+
+tap.test('getBulk', async t => {
+  const result = await s3.getBulk(['key1', 'key1.published', 'key1.json'], false, { v1: 76 });
+  t.match(result, [
+    { v1: true, v2: 'v2' },
+    { v1: 'this is the published version', published: true },
+    { v1: 76 }]);
+  t.end();
+});
+
+tap.test('listAndGet', async t => {
+  await s3.put('folder1/key1', {
+    v1: 1234,
+  });
+  await s3.put('folder1/key2', {
+    v2: 5678,
+  });
+  const folderResult = await s3.listAndGet('folder1/');
+  t.match(folderResult, [{ v1: 1234 }, { v2: 5678 }]);
   t.end();
 });
 
