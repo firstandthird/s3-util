@@ -24,7 +24,7 @@ class Storage {
       this.library.get(key, version, this.config, fallback)));
   }
 
-  async exists(key) {
+  exists(key) {
     return this.library.exists(key, this.config);
   }
 
@@ -40,11 +40,11 @@ class Storage {
     return this.getBulk(list.CommonPrefixes.map(l => `${prefix}${l.Prefix}`));
   }
 
-  async listVersions(prefix, publishedPrefix = false) {
+  listVersions(prefix, publishedPrefix = false) {
     return this.library.listVersions(prefix, publishedPrefix, this.config);
   }
 
-  async delete(prefix, publishedPrefix = false, config) {
+  delete(prefix, publishedPrefix = false, config) {
     return this.library.delete(prefix, publishedPrefix, this.config);
   }
 }

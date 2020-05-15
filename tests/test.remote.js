@@ -45,7 +45,7 @@ tap.test('list', async t => {
 
 tap.test('listVersion', async t => {
   // make a published version:
-  const putResult = await s3.put('key1.published', {
+  await s3.put('key1.published', {
     v1: 'this is the published version',
     published: true
   });
