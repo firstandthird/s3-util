@@ -32,6 +32,14 @@ class Storage {
     return this.library.list(prefix, continuationToken, pageSize, this.config);
   }
 
+  async listAndGet(prefix = false, continuationToken = false, pageSize = false) {
+    const list = await this.library.list(prefix, continuationToken, pageSize, this.config);
+    if (list.Contents) {
+      return this.getBulk(list.Contents.map(l => l.Key));
+    }
+    return this.getBulk(list.CommonPrefixes.map(l => `${prefix}${l.Prefix}`));
+  }
+
   async listVersions(prefix, publishedPrefix = false) {
     return this.library.listVersions(prefix, publishedPrefix, this.config);
   }

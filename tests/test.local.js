@@ -79,6 +79,13 @@ tap.test('list with folders', async t => {
   t.end();
 });
 
+tap.test('listAndGet', async t => {
+  const folderResult = await s3.listAndGet('folder1');
+  t.match(folderResult[0].Body.toString(), '{"folder":true}');
+  t.match(folderResult[1].Body.toString(), 'undefined');
+  t.end();
+});
+
 tap.test('get JSON', async t => {
   await s3.put('key1.json', {
     v1: true,
